@@ -15,16 +15,4 @@ describe Kansen::Note do
       end
     end
   end
-
-  describe '#parse' do
-    let(:kansen) { Kansen::Note.new(note: 'test_note') }
-
-    before do
-
-    end
-
-    it 'returns note value' do
-      expect(kansen.parse).to eq 'test_note'
-    end
-  end
 end
