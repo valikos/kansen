@@ -1,5 +1,5 @@
 module Kansen
-  module Parsers
+  module Parser
     class Base
       def initialize(note)
         @note = note

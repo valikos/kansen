@@ -1,4 +1,4 @@
-module Kansen::Parsers
+module Kansen::Parser
   class Float < Base
     def parse
       @note.to_f

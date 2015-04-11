@@ -1,8 +1,8 @@
 require 'spec_helper'
 
-describe Kansen::Parsers::Null do
+describe Kansen::Parser::Null do
   describe '#parse' do
-    let(:parser) { Kansen::Parsers::Null.new 'default' }
+    let(:parser) { Kansen::Parser::Null.new 'default' }
 
     it 'does not convert note' do
       expect(parser.parse).to eq 'default'

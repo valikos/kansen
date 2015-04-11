@@ -1,18 +1,46 @@
 require 'spec_helper'
 
 describe Kansen::Note do
-  describe '.new' do
-    context 'when missing note' do
+  let(:type) { 'string' }
+  let(:note) { 'tomato' }
+
+  let(:parser) { double('Parser', new: true, parse: note) }
+  let(:mapper) { double(new: parser) }
+
+
+  describe '.initialize' do
+    context 'when missing params' do
       it 'raises MissingNote exception' do
-        expect { Kansen::Note.new }.to raise_exception Kansen::MissingNote
+        expect { Kansen::Note.new }.to raise_error Kansen::MissingNote
       end
     end
 
-    context 'when type not in TYPES' do
-      it 'raises WrongNoteType exception' do
-        expect { Kansen::Note.new(type: :fake) }.
-          to raise_exception Kansen::WrongNoteType
+    context 'when passing arguments' do
+      before do
+        allow(Kansen::Mapper::NoteType).to receive(:perform) { type }
+        allow(Kansen::Mapper::NoteParser).to receive(:perform) { parser }
+        @object = Kansen::Note.new(note: 'tomato', type: 'string')
       end
+
+      it 'sets type from mapper' do
+        expect(@object.type).to eq 'string'
+      end
+
+      it 'sets note from parser' do
+        expect(@object.note).to eq 'tomato'
+      end
+    end
+  end
+
+  describe '#parse' do
+    before do
+      allow(Kansen::Mapper::NoteType).to receive(:perform) { type }
+      allow(Kansen::Mapper::NoteParser).to receive(:perform) { mapper }
+      @object = Kansen::Note.new(note: 'tomato', type: 'string')
+    end
+
+    it 'returns parsed note' do
+      expect(@oblect.parse).to eq 'tomato'
     end
   end
 end
