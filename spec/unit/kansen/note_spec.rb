@@ -3,10 +3,7 @@ require 'spec_helper'
 describe Kansen::Note do
   let(:type) { 'string' }
   let(:note) { 'tomato' }
-
-  let(:parser) { double('Parser', new: true, parse: note) }
-  let(:mapper) { double(new: parser) }
-
+  let(:parser) { double('Parser', parse: 'tomato') }
 
   describe '.initialize' do
     context 'when missing params' do
@@ -35,12 +32,12 @@ describe Kansen::Note do
   describe '#parse' do
     before do
       allow(Kansen::Mapper::NoteType).to receive(:perform) { type }
-      allow(Kansen::Mapper::NoteParser).to receive(:perform) { mapper }
+      allow(Kansen::Mapper::NoteParser).to receive(:perform) { parser }
       @object = Kansen::Note.new(note: 'tomato', type: 'string')
     end
 
     it 'returns parsed note' do
-      expect(@oblect.parse).to eq 'tomato'
+      expect(@object.parse).to eq 'tomato'
     end
   end
 end
