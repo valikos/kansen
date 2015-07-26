@@ -2,9 +2,7 @@
 
 # Kansen
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/kansen`. To experiment with that code, run `bin/console` for an interactive prompt.
-
-TODO: Delete this and the text above, and describe your gem
+This is library that allows you to update a configuration files without any global changes in the project. Main condition is the configuration is not immutable.
 
 ## Installation
 
@@ -23,8 +21,13 @@ Or install it yourself as:
     $ gem install kansen
 
 ## Usage
+Add code below to the `config/environments/development.rb` or any other environment file or to the `config/application.rb`
 
-TODO: Write usage instructions here
+    config.after_initialize do
+      collection = Kansen.parse File.join(Rails.root, 'tmp/kansen_konfigs.yml')
+      Kansen.modify Rails.application.config, with: collection
+    end
+
 
 ## Development
 

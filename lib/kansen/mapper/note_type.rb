@@ -7,11 +7,8 @@ module Kansen
       }
 
       def self.perform(type)
-        if TYPES.include? type
-          type
-        else
-          raise Kansen::WrongNoteType
-        end
+        raise Kansen::WrongNoteType unless TYPES.include? type
+        type
       end
     end
   end

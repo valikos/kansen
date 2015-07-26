@@ -5,13 +5,7 @@ class Kansen::Notes
     @collection = []
   end
 
-  def <<(note)
-    puts "="*80
-    puts note.class
-    if note.kind_of? Kansen::Note
-      @collection << note
-    else
-      raise Kansen::WrongNoteType
-    end
+  def <<(item)
+    @collection << item
   end
 end
