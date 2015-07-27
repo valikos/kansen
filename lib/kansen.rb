@@ -10,10 +10,10 @@ module Kansen
   class << self
     def parse(notes)
       collection = Kansen::Notes.new
-      notes.each do |i|
-        i.each_pair do |k, v|
-          collection << { k => Kansen::Note.new(note: v[:note], type: v[:type]) }
-        end
+      notes.each_pair do |k, v|
+        collection << Kansen::Note.new(note: v[:note],
+                                       type: v[:type],
+                                       key: k)
       end
       collection
     end

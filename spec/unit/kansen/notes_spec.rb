@@ -13,7 +13,7 @@ describe Kansen::Notes do
     end
 
     context 'when right note' do
-      let(:note) { Kansen::Note.new(note: 'tomato', type: 'string') }
+      let(:note) { Kansen::Note.new(note: 'tomato', type: 'string', key: 'key') }
 
       it 'collects one' do
         notes << note

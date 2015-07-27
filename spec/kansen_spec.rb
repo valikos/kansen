@@ -3,8 +3,8 @@ require 'spec_helper'
 describe Kansen do
   describe '.parse' do
     let(:cfg) {
-      [ {foo: { note: :foo, type: 'string' }},
-        {bar: { note: :bar, type: 'string' }} ]
+      { foo: { note: :foo, type: 'string' },
+        bar: { note: :bar, type: 'string' } }
     }
 
     it 'returns collection of notes' do
