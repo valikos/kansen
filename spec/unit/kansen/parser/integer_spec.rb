@@ -1,11 +1,9 @@
 require 'spec_helper'
 
 describe Kansen::Parser::Integer do
-  describe '#parse' do
-    let(:parser) { Kansen::Parser::Integer.new '13' }
-
+  describe '.parse' do
     it 'converts note to integer' do
-      expect(parser.parse).to eq 13
+      expect(Kansen::Parser::Integer.parse(13)).to eq 13
     end
   end
 end

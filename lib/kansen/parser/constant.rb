@@ -1,7 +1,7 @@
 module Kansen::Parser
-  class Constant < Base
-    def parse
-      Kernel.const_get(@note)
+  class Constant
+    def self.parse(note)
+      Kernel.const_get(note)
     end
   end
 end

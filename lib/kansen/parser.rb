@@ -1,4 +1,3 @@
-require 'kansen/parser/base'
 require 'kansen/parser/float'
 require 'kansen/parser/integer'
 require 'kansen/parser/constant'

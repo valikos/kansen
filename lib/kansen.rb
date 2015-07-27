@@ -11,9 +11,9 @@ module Kansen
     def parse(notes)
       collection = Kansen::Notes.new
       notes.each_pair do |k, v|
-        collection << Kansen::Note.new(note: v[:note],
-                                       type: v[:type],
-                                       key: k)
+        collection << Kansen::Note.build(note: v[:note],
+                                         type: v[:type],
+                                         key: k)
       end
       collection
     end

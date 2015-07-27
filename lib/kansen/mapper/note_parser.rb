@@ -8,11 +8,11 @@ module Kansen
           'float'    => 'Float',
           'constant' => 'Constant' }
 
-      def self.perform(type, note)
+      def self.parse(type, note)
         Kernel.
           const_get('Kansen').
           const_get('Parser').
-          const_get(PARSERS[type]).new(note)
+          const_get(PARSERS[type]).parse(note)
       rescue
         raise Kansen::MissingParser
       end

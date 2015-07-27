@@ -1,7 +1,7 @@
 module Kansen::Parser
-  class Float < Base
-    def parse
-      @note.to_f
+  class Float
+    def self.parse(note)
+      note.to_f
     end
   end
 end

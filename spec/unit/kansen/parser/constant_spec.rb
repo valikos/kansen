@@ -5,11 +5,9 @@ module Foo
 end
 
 describe Kansen::Parser::Constant do
-  describe '#parse' do
-    let(:parser) { Kansen::Parser::Constant.new 'Foo::Bar' }
-
+  describe '.parse' do
     it 'converts note to constant' do
-      expect(parser.parse).to eq Foo::Bar
+      expect(Kansen::Parser::Constant.parse('Foo::Bar')).to eq Foo::Bar
     end
   end
 end

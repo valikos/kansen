@@ -1,16 +1,17 @@
 module Kansen
   class Note
-    attr_reader :type, :note, :key
+    attr_reader :key, :value
 
-    def initialize(args = {})
-      @note = args.fetch(:note) { raise Kansen::MissingNote }
-      @key = args.fetch(:key) { raise Kansen::MissingKey }
-      @type = Kansen::Mapper::NoteType.perform args[:type]
-      @parser = Kansen::Mapper::NoteParser.perform(@type, @note)
+    def self.build(args = {})
+      note = args.fetch(:note) { raise Kansen::MissingNote }
+      key = args.fetch(:key) { raise Kansen::MissingKey }
+      type = Kansen::Mapper::NoteType.perform args[:type]
+      new key, Kansen::Mapper::NoteParser.parse(type, note)
     end
 
-    def parse
-      @parser.parse
+    def initialize(key, value)
+      @key = key
+      @value = value
     end
   end
 end
