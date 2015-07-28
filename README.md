@@ -9,16 +9,12 @@ This is library that allows you to update a configuration files without any glob
 Add this line to your application's Gemfile:
 
 ```ruby
-gem 'kansen'
+gem 'kansen', github: 'valikos/kansen'
 ```
 
 And then execute:
 
     $ bundle
-
-Or install it yourself as:
-
-    $ gem install kansen
 
 ## Usage
 Add code below to the `config/environments/development.rb` or any other environment file or to the `config/application.rb`
