@@ -1,6 +1,6 @@
-[![Code Climate](https://codeclimate.com/github/valikos/kansen/badges/gpa.svg)](https://codeclimate.com/github/valikos/kansen)
-
 # Kansen
+
+[![Code Climate](https://codeclimate.com/github/valikos/kansen/badges/gpa.svg)](https://codeclimate.com/github/valikos/kansen) [![Build Status](https://travis-ci.org/valikos/kansen.svg?branch=develop)](https://travis-ci.org/valikos/kansen)
 
 This is library that allows you to update a configuration files without any global changes in the project. Main condition is the configuration is not immutable.
 
