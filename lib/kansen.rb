@@ -17,5 +17,13 @@ module Kansen
       end
       collection
     end
+
+    def modify(target, notes)
+      target.instance_eval do
+        notes.collection.each do |note|
+          self.instance_variable_set("@#{note.key}", note.value)
+        end
+      end
+    end
   end
 end

@@ -2,7 +2,7 @@
 
 [![Code Climate](https://codeclimate.com/github/valikos/kansen/badges/gpa.svg)](https://codeclimate.com/github/valikos/kansen) [![Test Coverage](https://codeclimate.com/github/valikos/kansen/badges/coverage.svg)](https://codeclimate.com/github/valikos/kansen/coverage) [![Build Status](https://travis-ci.org/valikos/kansen.svg?branch=develop)](https://travis-ci.org/valikos/kansen)
 
-This is library that allows you to update a configuration files without any global changes in the project. Main condition is the configuration is not immutable.
+This is library that allows you to update a object values without any code changes in the project. Main condition is the target object is mutable.
 
 ## Installation
 
@@ -17,13 +17,15 @@ And then execute:
     $ bundle
 
 ## Usage
+
 Add code below to the `config/environments/development.rb` or any other environment file or to the `config/application.rb`
 
     config.after_initialize do
-      collection = Kansen.parse File.join(Rails.root, 'tmp/kansen_konfigs.yml')
-      Kansen.modify Rails.application.config, with: collection
+      notes = Kansen.parse File.join(Rails.root, 'tmp/kansen_notes.yml')
+      Kansen.modify Rails.application.config, notes
     end
 
+After that your target object should be changed with our notes.
 
 ## Development
 
