@@ -1,11 +1,18 @@
 require 'spec_helper'
 
 describe Kansen do
-  it 'has a version number' do
-    expect(Kansen::VERSION).not_to be nil
+  describe '.parse' do
+    let(:cfg) {
+      { foo: { note: :foo, type: 'string' },
+        bar: { note: :bar, type: 'string' } }
+    }
+
+    it 'returns collection of notes' do
+      expect(Kansen.parse(cfg)).to be_a_instance_of Kansen::Notes
+    end
   end
 
-  it 'does something useful' do
-    expect(false).to eq(true)
+  it 'has a version number' do
+    expect(Kansen::VERSION).not_to be nil
   end
 end

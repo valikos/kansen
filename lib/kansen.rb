@@ -1,9 +1,21 @@
 require 'kansen/version'
 
+require 'kansen/errors'
+require 'kansen/mapper'
+require 'kansen/parser'
 require 'kansen/note'
-require 'kansen/parsers'
+require 'kansen/notes'
 
 module Kansen
-  MissingNote = Class.new(StandardError)
-  WrongNoteType = Class.new(StandardError)
+  class << self
+    def parse(notes)
+      collection = Kansen::Notes.new
+      notes.each_pair do |k, v|
+        collection << Kansen::Note.build(note: v[:note],
+                                         type: v[:type],
+                                         key: k)
+      end
+      collection
+    end
+  end
 end

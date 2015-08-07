@@ -1,26 +1,17 @@
 module Kansen
   class Note
-    attr_reader :type, :note
+    attr_reader :key, :value
 
-    TYPES = %w{
-      string integer float class constant
-    }
-
-    def initialize(options = {})
-      @type = check_type options.fetch(:type, :string)
-      @note = options.fetch(:note) { raise Kansen::MissingNote }
-      @parser = 1
+    def self.build(args = {})
+      note = args.fetch(:note) { raise Kansen::MissingNote }
+      key = args.fetch(:key) { raise Kansen::MissingKey }
+      type = Kansen::Mapper::NoteType.perform args[:type]
+      new key, Kansen::Mapper::NoteParser.parse(type, note)
     end
 
-    def parse
-      @note
-    end
-
-    protected
-
-    def check_type(type)
-      raise Kansen::WrongNoteType unless TYPES.include? type.to_s
-      type
+    def initialize(key, value)
+      @key = key
+      @value = value
     end
   end
 end
