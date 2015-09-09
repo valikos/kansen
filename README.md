@@ -18,13 +18,65 @@ And then execute:
 
 ## Usage
 
+### Configuration
+
+The best thing start with the configuration. In configuration you can describe which attributes you want to change. You should set attribute name and describe `note` and `type`. `note` it's value of attribute that you want change. `type` it's format of new value.
+`Kansen` suports next types:
+
+- string
+- integer
+- float
+- constant
+
+In practice this will be as follows:
+
+```yaml
+first:
+  note: 'one'
+  type: 'string'
+second:
+  note: 2
+  type: 'integer'
+third:
+  note: 'Three'
+  type: 'constant'
+```
+
+### Modification
+
+You can change any type of a object. Main condition is the object responds to messages.
+
+`Kansen` can change hashes and objects. When you're working on modification of target you can use next modification strategies:
+
+- `accessor`. This strategy similar how you use `attr_accessor` in ruby.
+- `setter`. This strategy use `instance_variable_set(name, value)` to change instance variable.
+- `hash`. This strategy is actual for hashes only.
+
+In the end it should look like this:
+
+```ruby
+notes = Kansen.parse YAML.load_file(notes_cfg)
+Kansen.modify TargetObject, with: notes, via: :accessor
+```
+
+Where `notes` is special collection of changes and `:accessor` is strategy.
+
+_Note: for hashes you should redefine hash like `target_hash = Kansen.modify target_hash, with: notes, via: :hash`_
+
+
+## Integration
+
+
+### Rails
+
 Add code below to the `config/environments/development.rb` or any other environment file or to the `config/application.rb`
 
-    config.after_initialize do
-      notes = Kansen.parse File.join(Rails.root, 'tmp/kansen_notes.yml')
-      Kansen.modify Rails.application.config, notes
+```ruby
+  config.after_initialize do
+      notes = Kansen.parse YAML.load_file(notes_cfg)
+      Kansen.modify Rails.application.config, with: notes, via: :accessor
     end
-
+```
 After that your target object should be changed with our notes.
 
 ## Development
