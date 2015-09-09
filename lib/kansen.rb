@@ -5,8 +5,15 @@ require 'kansen/mapper'
 require 'kansen/parser'
 require 'kansen/note'
 require 'kansen/notes'
+require 'kansen/modifiers'
 
 module Kansen
+  MODIFY_MAP = {
+    hash:     Kansen::Modifiers::Hash,
+    setter:   Kansen::Modifiers::Setter,
+    accessor: Kansen::Modifiers::Accessor
+  }
+
   class << self
     def parse(notes)
       collection = Kansen::Notes.new
@@ -16,6 +23,10 @@ module Kansen
                                          key: k)
       end
       collection
+    end
+
+    def modify(target, args)
+      MODIFY_MAP[args[:via]].new(target, args[:with]).modify
     end
   end
 end
