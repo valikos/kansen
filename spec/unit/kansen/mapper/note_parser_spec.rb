@@ -28,5 +28,9 @@ describe Kansen::Mapper::NoteParser do
       expect(Kansen::Mapper::NoteParser.parse('constant', 'BasicObject')).
         to be_a BasicObject
     end
+    it 'returns symbol' do
+      expect(Kansen::Mapper::NoteParser.parse('symbol', 'foo')).
+        to be_a Symbol
+    end
   end
 end
