@@ -11,7 +11,7 @@ describe Kansen::Mapper::NoteType do
 
     context 'when valid type' do
       %w{
-        string integer float constant
+        string integer float constant symbol
       }.each do |type|
         it "returns #{type} type" do
           expect(subject.perform(type)).to eq type
